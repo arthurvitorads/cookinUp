@@ -15,7 +15,7 @@ import BotaoPrincipal from './BotaoPrincipal.vue';
         async created() {
             this.categorias = await obterCategorias ()
         },
-        emits: ['adicionarIngrediente', 'removerIngrediente']
+        emits: ['adicionarIngrediente', 'removerIngrediente', 'buscarReceitas']
     }
 </script>
 
@@ -39,7 +39,7 @@ import BotaoPrincipal from './BotaoPrincipal.vue';
             ATENCAO: Consideramos que voce tenha sal, pimenta e agua em casa!
         </p>
 
-        <BotaoPrincipal texto="Buscar receitas!" />
+        <BotaoPrincipal texto="Buscar receitas!" @click="$emit('buscarReceitas')"/>
     </section>
 </template>
 

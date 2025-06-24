@@ -1,9 +1,11 @@
 <template>
     <main class="conteudo-principal">
       <SuaLista :ingredientes="ingredientes" />
-      <SelectIngredientes
+      <SelectIngredientes v-if="conteudo === 'SelecionarIngredientes'"
       @adicionar-ingrediente="adicionarIngredientes"
-      @remover-ingrediente="removerIngredientes" />
+      @remover-ingrediente="removerIngredientes" 
+      @buscarReceitas="conteudo = 'MostrarReceitas'"/>
+      <MostrarReceitas v-else-if="conteudo === 'MostrarReceitas'"/>
     </main>
 </template>
 
@@ -36,19 +38,24 @@
 </style>
 
 <script lang="ts">
-import SelectIngredientes from './SelectIngredientes.vue';
-import SuaLista from './SuaLista.vue';
-import Tag from './Tag.vue';
+import SelectIngredientes from './SelectIngredientes.vue'
+import SuaLista from './SuaLista.vue'
+import Tag from './Tag.vue'
+import MostrarReceitas from './MostrarReceitas.vue'
+
+type Pagina = 'SelecionarIngredientes' | 'MostrarReceitas'
 
     export default{
         components: {
             SuaLista: SuaLista,
             SelectIngredientes: SelectIngredientes,
-            Tag: Tag
+            Tag: Tag,
+            MostrarReceitas: MostrarReceitas
         },
         data(){
             return{
-                ingredientes: []
+                ingredientes: [],
+                conteudo: 'SelecionarIngredientes' as Pagina
             }
         },
         methods: {
@@ -59,6 +66,9 @@ import Tag from './Tag.vue';
           },
           removerIngredientes(ingrediente: string) {
             this.ingredientes = this.ingredientes.filter(item => item !== ingrediente);
+          },
+          navegar(pagina: Pagina){
+            this.conteudo = 'MostrarReceitas'
           }
         }
     }
