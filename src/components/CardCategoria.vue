@@ -1,5 +1,11 @@
 <script lang="ts">
+import Tag from './Tag.vue';
+
     export default {
+        components: {
+            Tag: Tag
+        },
+
         props: {
             categoria: {type: Object, required: true}
         }
@@ -15,7 +21,7 @@
 
         <ul class="categoria__ingredientes">
             <li v-for="ingrediente in categoria.ingredientes" :key="ingrediente">
-                {{ ingrediente }}
+                <Tag :texto="ingrediente"/>
             </li>
         </ul>
     </article>
