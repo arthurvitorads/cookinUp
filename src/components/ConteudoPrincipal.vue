@@ -1,7 +1,9 @@
 <template>
     <main class="conteudo-principal">
       <SuaLista :ingredientes="ingredientes" />
-      <SelectIngredientes/>
+      <SelectIngredientes
+      @adicionar-ingrediente="adicionarIngredientes"
+      @remover-ingrediente="removerIngredientes" />
     </main>
 </template>
 
@@ -46,8 +48,18 @@ import Tag from './Tag.vue';
         },
         data(){
             return{
-                ingredientes: ['Alho', 'Manteiga']
+                ingredientes: []
             }
+        },
+        methods: {
+          adicionarIngredientes(ingrediente: string) {
+            if (!this.ingredientes.includes(ingrediente)) {
+              this.ingredientes.push(ingrediente);
+            }
+          },
+          removerIngredientes(ingrediente: string) {
+            this.ingredientes = this.ingredientes.filter(item => item !== ingrediente);
+          }
         }
     }
 </script>
