@@ -1,9 +1,11 @@
 <script lang="ts">
+import IngredienteSelecionavel from './IngredienteSelecionavel.vue';
 import Tag from './Tag.vue';
 
     export default {
         components: {
-            Tag: Tag
+            Tag: Tag,
+            IngredienteSelecionavel: IngredienteSelecionavel
         },
 
         props: {
@@ -21,7 +23,7 @@ import Tag from './Tag.vue';
 
         <ul class="categoria__ingredientes">
             <li v-for="ingrediente in categoria.ingredientes" :key="ingrediente">
-                <Tag :texto="ingrediente"/>
+              <IngredienteSelecionavel :ingrediente="ingrediente"/>
             </li>
         </ul>
     </article>
